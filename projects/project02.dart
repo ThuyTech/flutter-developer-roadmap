@@ -5,7 +5,7 @@ void input(String text) {
   stdout.write(text);
 }
 
-// Hàm nhập 2 số
+// Hàm nhập lựa chọn số
 int? inputNumber(String text) {
   input(text);
   return int.tryParse(stdin.readLineSync() ?? '');
