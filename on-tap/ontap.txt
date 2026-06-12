@@ -1,0 +1,106 @@
+DART là ngôn ngữ dùng để xây dựng các ứng dụng đa nền tảng (di động, web, máy tính) thông qua framework Flutter. Nó giúp LTV viết mã nguồn một lần và triển khai mượt mà trên nhiều HĐH
+Phát triển ứng dụng di động: Là ngôn ngữ cốt lõi của Flutter, giúp tạo ra các ứng dụng chạy hoàn hảo trên cả Android và iOS
+Dart là ngôn ngữ có kiểu dữ liệu
+
+1. Variables:
+- var: dùng để khai báo biến, tự suy luận kiểu dữ liệu, sau khi suy luận thì ko đổi kiểu đc nữa
+- dynamic: dùng để khai báo biến, tự do linh hoạt đổi kiểu dữ liệu liên tục
+- object: mọi kiểu dữ liệu trong dart đều kế thừa đối tượng
+- late: dùng để khai báo biến trước, gán giá trị sau
+- final: chỉ gán 1 lần duy nhất -> đc tạo lúc tại run-time
+- const: giá trị tạo -> đc xác định tại compile-time
+
+2. Operators:
+- Arithmetic Operators: +, -, *, /, %, ~/ (phép chia lấy phần nguyên. Vd: 10 ~/ 3 = 3)
+- Increment & Decrement: --, ++
+- Comparison Operators: ==, <=, >=, !=, >, <
+- Type Test Operators: is, is!
+- Assignment Operators: =, +=, -=, *=, /=, ~/=, %=
+- Null-Aware Operators: 
+??: nếu giá trị bến trái là null, thì sẽ trả giá trị bên phải
+??=: nếu biến đang null, thì sẽ thực hiện phép gán
+?.: dùng để gọi method hoặc property của đối tượng an toàn (hay ko bị crash)
+- Logical Operators: !, ||, &&
+- Conditional Operator: condition ? value1 : value2
+- Cascade Operator: ..  -> Cho phép gọi liên tiếp trên cùng một object
+Vd:
+Không dùng cascade:
+var user = User();
+user.name = 'Thuy';
+user.age = 23;
+user.showInfo();
+Khi dùng cascade:
+var user = User()
+  ..name = 'Thuy'
+  ..age = 23
+  ..showInfo();
+- Spread Operator: ... -> Dùng để gộp list hoặc lấy hết tất cả phần tử trong list
+- Null-aware spread: ...? -> khi list null, thì ko bị crash
+- Collection If, Collection For, Collection switch-case: dùng như toán tử đc gán sau dấu =
+
+3. Types
+a. Built-in types:
+- number (int, double)
+- String
+- bool
+- Collection (List, Set, Map)
+List<int> nums = [1, 2, 3];
+Set<int> s = {1, 2, 3};
+Map<String, String> user = {
+  "name": "Thuy"
+};
+- Record -> Gộp nhiều giá trị lại
+(var name, var age) = ("Thuy", 23);
+- Future và Stream -> dùng để xử lý lập trình bất đồng bộ
+a/ Future đại diện cho một kết quả của một hoạt động bất đồng bộ sẽ trả về một giá trị duy nhất (hoặc một lỗi) tại một thời điểm nào đó trong tương lai.
+Các trạng thái của future:
+. Uncompleted (Chưa hoàn thành): Hoạt động bất đồng bộ đang chạy (đang đợi phản hồi từ server, đang đọc file, ...).
+. Completed with value (Hoàn thành có kết quả): Trả về dữ liệu thành công.
+. Completed with error (Hoàn thành có lỗi): Xảy ra sự cố (mất mạng, sai đường dẫn file, ...).
+Cách sử dụng Future:
+C1: dùng async và await (Khuyên dùng vì code nhìn rất sạch, và đồng bộ)
+Future<String> fetchUserData() async {
+  // Giả lập delay 2 giây giống như gọi API từ server
+  await Future.delayed(Duration(seconds: 2)); 
+  return "Người dùng: Nguyễn Văn A";
+}
+
+void main() async {
+  print("Đang tải dữ liệu...");
+  String user = await fetchUserData(); // Đợi cho đến khi Future hoàn thành
+  print(user);
+  print("Kết thúc!");
+}  
+
+b/ Stream là một chuỗi các sự kiện gửi dữ liệu về liên tục theo thời gian
+Cách sử dụng Stream:
+C1: Lắng nghe bằng hàm listen()
+Stream<int> countSeconds(int maxSeconds) async* {
+  for (int i = 1; i <= maxSeconds; i++) {
+    await Future.delayed(Duration(seconds: 1));
+    yield i; // Từ khóa 'yield' dùng để bơm dữ liệu vào Stream từng chút một
+  }
+}
+void main() {
+  print("Bắt đầu đếm giây...");
+  Stream<int> timerStream = countSeconds(5);
+
+  // Lắng nghe đường ống dữ liệu
+  timerStream.listen((second) {
+    print("Giây thứ: $second");
+  }, onDone: () {
+    print("Đếm xong rồi!");
+  });
+}
+
+C2: Dùng await for (Vòng lặp bất đồng bộ)
+void main() async {
+  Stream<int> timerStream = countSeconds(3);
+  
+  await for (int second in timerStream) {
+    print("Nhận được: $second");
+  }
+  print("Đường ống đã đóng.");
+}
+
+=> MỌI THỨ TRONG DART LÀ OBJECT
