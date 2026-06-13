@@ -1,0 +1,31 @@
+Giai đoạn 1: Thành thạo cú pháp Dart cơ bản
+
+=== Biến và kiểu dữ liệu ===
+Bài tập:
+a. Nhập tên, tuổi rồi in ra màn hình.
+b. Tính diện tích hình chữ nhật.
+c. Đổi độ C sang độ F.
+
+=== Toán tử ===
+Bài tập:
+a. Tính tổng 2 số.
+b. Kiểm tra số chẵn lẻ.
+c. Tìm số lớn nhất trong 2 số.
+
+=== Điều kiện ===
+Bài tập:
+a. Xếp loại học lực.
+b. Kiểm tra năm nhuận.
+c. Máy tính đơn giản.
+
+=== Vòng lặp ===
+Bài tập:
+a. In bảng cửu chương.
+b. Tính tổng từ 1 → n.
+c. In tam giác sao.
+
+=== Function ===
+Bài tập:
+a. Hàm tính giai thừa.
+b. Hàm kiểm tra số nguyên tố.
+c. Hàm tìm số lớn nhất.
